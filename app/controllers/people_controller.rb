@@ -8,7 +8,6 @@ class PeopleController < ApplicationController
             with(:location).in_radius(current_user.lat, current_user.lon, params[:radius])
           end
         end
-
         @people = search.results
       else
         @people = []

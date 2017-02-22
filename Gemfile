@@ -45,5 +45,17 @@ group :development do
   gem 'spring'
 end
 
+
+
   gem 'sunspot_rails'
   gem 'sunspot_solr'
+
+  gem 'blacklight', "~> 6.0"
+group :development, :test do
+  gem 'solr_wrapper', '>= 0.3'
+end
+
+gem 'rsolr', '~> 1.0'
+gem 'devise'
+gem 'devise-guests', '~> 0.5'
+gem 'blacklight-marc', '~> 6.1'

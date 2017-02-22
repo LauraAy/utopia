@@ -1,10 +1,34 @@
 Rails.application.routes.draw do
-  get 'people/index'
 
   get 'people/index'
 
-  root to: 'people#index'
-  resources :people
+  mount Blacklight::Engine => '/'
+  root to: "people#index"
+    concern :searchable, Blacklight::Routes::Searchable.new
+     resources :people
+
+  resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
+    concerns :searchable
+  end
+
+  devise_for :users
+  concern :exportable, Blacklight::Routes::Exportable.new
+
+  resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
+    concerns :exportable
+  end
+
+  resources :bookmarks do
+    concerns :exportable
+
+    collection do
+      delete 'clear'
+    end
+  end
+
+
+ # root to: 'people#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

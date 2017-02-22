@@ -1,7 +1,6 @@
 <% @people.each do |person| %>
   <%= render partial: 'person', locals: {person: person} %>
 <% end %>
-
 <% if flash[:alert].present? %>
   <h1 style="color:red"><%= flash[:alert] %>
 <% end %>
@@ -33,6 +32,7 @@
     <div> <%= f.text_field :dislikes, placeholder: 'Stuff you don\'t ' %> </div>
     <div> <%= f.submit 'Save' %> </div>
   <% end %>
+
   <script>
     navigator.geolocation.getCurrentPosition(function(position) {
       document.querySelector('#person_lat').value = position.coords.latitude;
